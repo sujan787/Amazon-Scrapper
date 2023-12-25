@@ -46,7 +46,8 @@ const getItems = async (searchInput: string): Promise<Array<ItemType> | []> => {
             }
 
             try {
-                let name = $(element).find('h2.a-size-mini.a-spacing-none.a-color-base.s-line-clamp-4').text() ?? "";
+                let name = $(element).find('h2.a-size-mini.a-spacing-none.a-color-base.s-line-clamp-4').text();
+                name = name.length ? name : $(element).find('h2.a-size-mini.a-spacing-none.a-color-base.s-line-clamp-2').text();
                 product.name = name.trim();
             } catch (error) {
                 console.log("no name")
