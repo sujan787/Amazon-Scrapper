@@ -10,11 +10,6 @@ type ItemType = {
     image: string
 }
 
-const option = {
-    executablePath: process.env.NODE_ENV === "production" ?
-        process.env.PUPPETEER_EXECUTABLE_PATH : puppeteer.executablePath(),
-}
-
 export const collectItems = async (searchInput: string)
     : Promise<Array<ItemType> | []> => {
     let data = await getItems(searchInput)
@@ -35,7 +30,7 @@ const getItems = async (searchInput: string): Promise<Array<ItemType> | []> => {
 
         const $ = cheerio.load(elementHTML);
 
-        $(`[data-component-type="s-search-result"]`).each((index: number, element) => {
+        $(`[data-component-type="s-search-result"]`).each((index, element) => {
 
             const product: ItemType = {
                 name: "",
