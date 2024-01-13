@@ -2,22 +2,28 @@ import Card from "./components/card";
 import CardSkeleton from "./components/card-skeleton";
 import { CiSearch } from "react-icons/ci";
 import { MdOutlineCleaningServices } from "react-icons/md";
+import { trpc } from "./lib/trpc";
 import { useState } from "react";
 
-// import { trpc } from "./lib/trpc";
-
-
-
-
 function App() {
-  const [searchInput, setSearchInput] = useState("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [items, setItems] = useState<
+    Array<{
+      name: string,
+      star: string,
+      price: string,
+      url: string,
+      image: string
+    }>>([]);
 
-  // const { data, isLoading } = trpc.scrapping.amazonItems.useQuery({ searchInput: searchInput });
-
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const input = (event.target as any).elements.searchInput.value;
-    setSearchInput(input);
+    setItems([])
+    setIsLoading(true)
+    const response = await trpc.scrapping.amazonItems.query({ searchInput: input });
+    setIsLoading(false)
+    setItems(response);
   };
 
   return (
@@ -39,17 +45,17 @@ function App() {
           </div>
         </div>
 
-        {/* {isLoading && <div className="grid grid-cols-4 p-10 gap-10">
-          {Array(6).fill({}).map((e, index) => (
+        {isLoading && <div className="grid grid-cols-4 p-10 gap-10">
+          {Array(4).fill({}).map((e, index) => (
             <CardSkeleton key={index} />
           ))}
-        </div>} */}
+        </div>}
 
-        {/* <div className=" grid grid-cols-4 p-10 gap-10">
-          {data && data?.map((item, index) => (
+        <div className=" grid grid-cols-4 p-10 gap-10">
+          {!!items.length && items?.map((item, index) => (
             <Card name={item.name} price={item.price} star={item.star} image={item.image} url={item.url} key={index} />
           ))}
-        </div> */}
+        </div>
       </div>
     </>
   )
