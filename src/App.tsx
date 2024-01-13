@@ -2,13 +2,15 @@ import Card from "./components/card";
 import CardSkeleton from "./components/card-skeleton";
 import { CiSearch } from "react-icons/ci";
 import { MdOutlineCleaningServices } from "react-icons/md";
-import { trpc } from "./lib/trpc";
 import { useState } from "react";
+
+// import { trpc } from "./lib/trpc";
+
 
 function App() {
   const [searchInput, setSearchInput] = useState("");
 
-  const { data, isLoading } = trpc.scrapping.amazonItems.useQuery({ searchInput: searchInput });
+  // const { data, isLoading } = trpc.scrapping.amazonItems.useQuery({ searchInput: searchInput });
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -35,17 +37,17 @@ function App() {
           </div>
         </div>
 
-        {isLoading && <div className="grid grid-cols-4 p-10 gap-10">
+        {/* {isLoading && <div className="grid grid-cols-4 p-10 gap-10">
           {Array(6).fill({}).map((e, index) => (
             <CardSkeleton key={index} />
           ))}
-        </div>}
+        </div>} */}
 
-        <div className=" grid grid-cols-4 p-10 gap-10">
+        {/* <div className=" grid grid-cols-4 p-10 gap-10">
           {data && data?.map((item, index) => (
             <Card name={item.name} price={item.price} star={item.star} image={item.image} url={item.url} key={index} />
           ))}
-        </div>
+        </div> */}
       </div>
     </>
   )
