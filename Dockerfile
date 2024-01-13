@@ -1,4 +1,12 @@
 # Build React app
+FROM node:alpine3.18 as apo
+WORKDIR /app/api
+COPY package.json .
+RUN npm install 
+COPY ./api .
+RUN yarn build
+
+# Build React app
 FROM node:alpine3.18 as build
 WORKDIR /app
 COPY package.json .
