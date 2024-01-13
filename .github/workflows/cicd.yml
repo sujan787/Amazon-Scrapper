@@ -14,17 +14,17 @@ jobs:
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_HUB_USER_NAME }} -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN}}
       - name: Build Docker Image
-        run: docker build -t amazon_scrapper/react_app .
+        run: docker build -t sujan9748/amazon_scrapper_react_js .
       - name: Publish image to Docker Hub
-        run: docker push amazon_scrapper/react_app:latest
+        run: docker push sujan9748/amazon_scrapper_react_js:latest
 
   deploy:
     needs: build
     runs-on: aws-ec2
     steps:
       - name: Pull Image from the Docker Hub
-        run: docker pull amazon_scrapper/react_app:latest
+        run: docker pull sujan9748/amazon_scrapper_react_js:latest
       - name: Delete Old Container
         run: docker rm -f reactContainer
       - name: Run docker container
-        run: docker run -d -p 3000:80 --name reactContainer amazon_scrapper/react_app
+        run: docker run -d -p 3000:80 --name reactContainer sujan9748/amazon_scrapper_react_js
