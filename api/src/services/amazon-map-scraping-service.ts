@@ -19,7 +19,7 @@ export const collectItems = async (searchInput: string)
 const getItems = async (searchInput: string): Promise<Array<ItemType> | []> => {
     const browser = await puppeteer.launch({
         executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
-        headless: "new",
+        headless: true,
         args: ['--no-sandbox']
     });
     
@@ -27,7 +27,7 @@ const getItems = async (searchInput: string): Promise<Array<ItemType> | []> => {
     let items = [] as Array<ItemType>;
 
     try {
-        await page.goto(`https://www.amazon.in/s?k=${searchInput}&crid=21ZNBZ4FCCXTG&sprefix=${searchInput}%2Caps%2C265&ref=nb_sb_noss_1`);
+        await page.goto(`https://www.amazon.in/s?k=${searchInput}`);
 
         const selector = `[data-component-type="s-search-results"]`
 
