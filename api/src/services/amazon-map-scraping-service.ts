@@ -17,7 +17,11 @@ export const collectItems = async (searchInput: string)
 }
 
 const getItems = async (searchInput: string): Promise<Array<ItemType> | []> => {
-    const browser = await puppeteer.launch({ headless: "new" });
+    const browser = await puppeteer.launch({
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
+        headless: "new"
+    });
+    
     const page = await browser.newPage();
     let items = [] as Array<ItemType>;
 
