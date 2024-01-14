@@ -18,7 +18,7 @@ export const collectItems = async (searchInput: string)
 
 const getItems = async (searchInput: string): Promise<Array<ItemType> | []> => {
     const browser = await puppeteer.launch({
-        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
+        executablePath: "/usr/bin/google-chrome-stable",
         headless: "new"
     });
     
