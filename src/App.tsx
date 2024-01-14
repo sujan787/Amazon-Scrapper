@@ -21,9 +21,12 @@ function App() {
     const input = (event.target as any).elements.searchInput.value;
     setItems([])
     setIsLoading(true)
-    const response = await trpc.scrapping.amazonItems.query({ searchInput: input });
+    try {
+      const response = await trpc.scrapping.amazonItems.query({ searchInput: input });
+      setItems(response);
+    } catch (error) {
+    }
     setIsLoading(false)
-    setItems(response);
   };
 
   return (
@@ -32,20 +35,20 @@ function App() {
         <div className="h-[40vh] bg-blue-100 flex justify-center items-center">
           <div className="flex flex-col gap-12">
             <div className="flex justify-center flex-col items-center gap-2">
-              <p className="text-blue-400 text-5xl font-bold uppercase flex gap-2">
+              <p className="text-blue-400 text-3xl md:text-5xl font-bold uppercase flex gap-2">
                 <MdOutlineCleaningServices />Amazon Scrapper</p>
-              <p className="text-lg">Get all amazon top product form here sujan</p>
+              <p className="md:text-lg">Get all amazon top product form here</p>
             </div>
 
             <form className="relative" onSubmit={(e) => handleSubmit(e)}>
-              <input type="text" placeholder="search the item name" name="searchInput" id="searchInput"
+              <input type="text" placeholder="search the item name ex: bat" name="searchInput" id="searchInput"
                 className="input input-bordered input-primary w-full max-w-xl bg-white rounded-full pl-12" />
               <CiSearch className=" absolute top-0 bottom-0 left-3 translate-y-3" size={25} />
             </form>
           </div>
         </div>
 
-        {isLoading && <div className="grid grid-cols-4 p-10 gap-10">
+        {isLoading && <div className="grid md:grid-cols-4 grid-cols-1 p-10 gap-10">
           {Array(4).fill({}).map((e, index) => (
             <CardSkeleton key={index} />
           ))}
