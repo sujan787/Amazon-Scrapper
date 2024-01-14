@@ -37,7 +37,7 @@ function App() {
             <div className="flex justify-center flex-col items-center gap-2">
               <p className="text-blue-400 text-3xl md:text-5xl font-bold uppercase flex gap-2">
                 <MdOutlineCleaningServices />Amazon Scrapper</p>
-              <p className="md:text-lg text-slate-500">Get a list of the top Amazon products from here.</p>
+              <p className="md:text-lg text-slate-500">Get a list of the top Amazon products</p>
             </div>
 
             <form className="relative" onSubmit={(e) => handleSubmit(e)}>
