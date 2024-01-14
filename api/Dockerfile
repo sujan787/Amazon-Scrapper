@@ -8,4 +8,4 @@ RUN npm ci
 COPY . .
 RUN  npm run build 2>&1 | tee build.log
 EXPOSE 3001
-CMD ["npm", "start"]
+CMD ["npm", "start", "--", "--no-sandbox"]
