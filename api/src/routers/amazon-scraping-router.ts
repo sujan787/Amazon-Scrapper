@@ -15,7 +15,11 @@ export const amazonScrappingRouter = trpc.router({
             const collectedData = await collectItems(searchInput);
             return collectedData;
         } catch (error: any) {
-            throw new TRPCError({ code: 'BAD_REQUEST', message: error.message ?? "Something  went wrong" });
+            return { error: error.message }
+
+            // throw new TRPCError({ code: 'BAD_REQUEST', message: error.message ?? "Something  went wrong" });
+
+
         }
     }),
 });
