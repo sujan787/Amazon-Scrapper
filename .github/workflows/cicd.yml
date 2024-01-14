@@ -13,7 +13,11 @@ jobs:
         uses: actions/checkout@v3
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_HUB_USER_NAME }} -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN}}
-      - name: Build Docker Image
+      - name: Build Docker Backed Image
+        run: docker build -t sujan9748/amazon_scrapper_react_js ./api
+      - name: Publish Backend image to Docker Hub
+        run: docker push sujan9748/amazon_scrapper_node_js:latest
+      - name: Build Docker Frontend Image
         run: docker build -t sujan9748/amazon_scrapper_react_js .
       - name: Publish image to Docker Hub
         run: docker push sujan9748/amazon_scrapper_react_js:latest
