@@ -26,9 +26,16 @@ jobs:
     needs: build
     runs-on: aws-ec2
     steps:
-      - name: Pull Image from the Docker Hub
+      - name: Pull Node Image from the Docker Hub
+        run: docker pull sujan9748/amazon_scrapper_node_js:latest
+      - name: Delete Old Node Container
+        run: docker rm -f nodeContainer
+      - name: Run docker Node container
+        run: docker run -d -p 3001:3001 --name nodeContainer sujan9748/amazon_scrapper_node_js
+
+      - name: Pull React Image from the Docker Hub
         run: docker pull sujan9748/amazon_scrapper_react_js:latest
-      - name: Delete Old Container
+      - name: Delete Old React Container
         run: docker rm -f reactContainer
-      - name: Run docker container
+      - name: Run docker React container
         run: docker run -d -p 3000:80 --name reactContainer sujan9748/amazon_scrapper_react_js
