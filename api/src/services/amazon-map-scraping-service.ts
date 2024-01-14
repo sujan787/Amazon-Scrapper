@@ -27,7 +27,7 @@ const getItems = async (searchInput: string): Promise<Array<ItemType> | []> => {
     let items = [] as Array<ItemType>;
 
     try {
-        await page.goto(`https://www.amazon.in/s?k=${searchInput}`);
+        await page.goto(`https://www.amazon.in/s?k=${searchInput}&crid=21ZNBZ4FCCXTG&sprefix=${searchInput}%2Caps%2C265&ref=nb_sb_noss_1`);
 
         const selector = `[data-component-type="s-search-results"]`
 

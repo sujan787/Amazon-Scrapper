@@ -54,7 +54,7 @@ function App() {
           ))}
         </div>}
 
-        <div className=" grid grid-cols-4 p-10 gap-10">
+        <div className="grid md:grid-cols-4 grid-cols-1 p-10 gap-10">
           {!!items.length && items?.map((item, index) => (
             <Card name={item.name} price={item.price} star={item.star} image={item.image} url={item.url} key={index} />
           ))}
