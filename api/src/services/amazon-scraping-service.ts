@@ -20,7 +20,10 @@ const getItems = async (searchInput: string): Promise<Array<ItemType> | []> => {
     const browser = await puppeteer.launch({
         executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
         headless: true,
-        args: ['--no-sandbox']
+        defaultViewport: null,
+        ignoreHTTPSErrors: true,
+        args: ['--no-sandbox','--disable-setuid-sandbox', '--start-maximized'],
+        ignoreDefaultArgs: ['--disable-extensions']
     });
     
     const page = await browser.newPage();
