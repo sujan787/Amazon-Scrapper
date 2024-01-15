@@ -34,6 +34,8 @@ const getItems = async (searchInput: string): Promise<Array<ItemType> | []> => {
 
         const selector = `[data-component-type="s-search-results"]`
 
+        await page.waitForSelector(selector);
+
         const elementHTML = await page.$eval(selector, (element) => element.innerHTML);
 
         const $ = cheerio.load(elementHTML);
