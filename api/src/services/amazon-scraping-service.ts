@@ -16,11 +16,14 @@ export const collectItems = async (searchInput: string)
     return data;
 }
 
+const proxyList = ['125.99.106.250:3128', '103.44.116.22:3128'];
+
 const getItems = async (searchInput: string): Promise<Array<ItemType> | []> => {
+    const randomProxy = proxyList[Math.floor(Math.random() * proxyList.length)];
     const browser = await puppeteer.launch({
         executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
         headless: true,
-        args: ['--no-sandbox'],
+        args: ['--no-sandbox',`--proxy-server=${randomProxy}`],
     });
     
     const page = await browser.newPage();
@@ -92,5 +95,5 @@ const getItems = async (searchInput: string): Promise<Array<ItemType> | []> => {
     }
     await browser.close();
     return items;
-};
+}; 
 
