@@ -28,6 +28,7 @@ export const collectItems = async (searchInput: string)
 const getItems = async (searchInput: string): Promise<Array<ItemType> | []> => {
     const randomProxy = proxyList[Math.floor(Math.random() * proxyList.length)];
     // args: ['--no-sandbox',`--proxy-server=${randomProxy}`]
+    
     const browser = await puppeteer.launch({
         executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
         headless: true,
