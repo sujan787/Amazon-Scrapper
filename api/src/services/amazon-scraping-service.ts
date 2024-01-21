@@ -23,7 +23,7 @@ const getItems = async (searchInput: string): Promise<Array<ItemType> | []> => {
     const browser = await puppeteer.launch({
         executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
         headless: true,
-        args: ['--no-sandbox',`--proxy-server=13.201.90.42:3000`],
+        args: ['--no-sandbox',`--proxy-server=http://13.201.90.42:3000`],
     });
     
     const page = await browser.newPage();
