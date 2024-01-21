@@ -1,6 +1,6 @@
 import * as cheerio from 'cheerio';
-import * as proxyChain from 'proxy-chain'
 
+import proxyList from '../data/proxy-list';
 import puppeteer from 'puppeteer';
 
 type ItemType = {
@@ -17,18 +17,13 @@ export const collectItems = async (searchInput: string)
     return data;
 }
 
-const proxyList = ['125.99.106.250:3128', '103.44.116.22:3128'];
-
 const getItems = async (searchInput: string): Promise<Array<ItemType> | []> => {
-    // const randomProxy = proxyList[Math.floor(Math.random() * proxyList.length)];
+    const randomProxy = proxyList[Math.floor(Math.random() * proxyList.length)];
 
-    const oldProxyUrl = 'http://13.201.90.42:3001';
-    const newProxyUrl = await proxyChain.anonymizeProxy(oldProxyUrl);
-    console.log(newProxyUrl)
     const browser = await puppeteer.launch({
         executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
         headless: true,
-        args: ['--no-sandbox',`--proxy-server=${newProxyUrl}`],
+        args: ['--no-sandbox',`--proxy-server=${randomProxy}`],
     });  
     
     const page = await browser.newPage();
