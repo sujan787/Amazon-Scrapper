@@ -1,7 +1,15 @@
+const StealthPlugin = require('puppeteer-extra-plugin-stealth')
+
 import * as cheerio from 'cheerio';
 
 import proxyList from '../data/proxy-list';
-import puppeteer from 'puppeteer';
+
+const puppeteer = require('puppeteer-extra')
+
+puppeteer.use(StealthPlugin())
+
+// import puppeteer from 'puppeteer';
+
 
 type ItemType = {
     name: string,
@@ -36,7 +44,7 @@ const getItems = async (searchInput: string): Promise<Array<ItemType> | []> => {
 
         await page.waitForSelector(selector);
 
-        const elementHTML = await page.$eval(selector, (element) => element.innerHTML);
+        const elementHTML = await page.$eval(selector, (element:any) => element.innerHTML);
 
         const $ = cheerio.load(elementHTML);
 
